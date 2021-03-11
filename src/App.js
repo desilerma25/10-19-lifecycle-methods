@@ -3,6 +3,8 @@ import Header from './Header'
 import ItemsContainer from './ItemsContainer'
 import CartContainer from './CartContainer'
 import './App.css';
+import {connect} from 'react-redux'
+import {gotItems} from './actions/action'
 
 class App extends React.Component{
 
@@ -35,8 +37,9 @@ class App extends React.Component{
 
     fetch("http://localhost:3000/items")
     .then(res => res.json())
-    .then(json => {
-      this.setState({items: json})
+    .then(json => {this.props.getItems(json)
+      // this.setState({items: json})
+
     })
   }
 
@@ -52,5 +55,10 @@ class App extends React.Component{
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getItems: (items) => dispatch(gotItems(items))
+  }
+}
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);

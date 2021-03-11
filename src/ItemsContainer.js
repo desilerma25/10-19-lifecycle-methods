@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from './Item'
 import FilterBar from './FilterBar'
+import { connect } from 'react-redux'
 
 class ItemsContainer extends React.Component {
 
@@ -35,4 +36,11 @@ class ItemsContainer extends React.Component {
     }
 }
 
-export default ItemsContainer
+const mapStateToProps = (state) => {
+  //picking from store, what we need
+  return state
+  //only want to pull what you need in future
+}
+
+export default connect(mapStateToProps)(ItemsContainer)
+//returns it already connected
